@@ -7,7 +7,7 @@ import { motifDaerahImages } from "@/lib/motif-daerah-images";
 import { useT } from "@/lib/i18n";
 import { motifText } from "@/lib/content-i18n";
 
-const title = "QR Motif Explorer — Motif Tradisional & Modern Sasirangan | Si Rangan";
+const title = "QR Motif Explorer — Motif Tradisional & Modern Sasirangan | RanganLab";
 const desc =
   "Jelajahi 20 motif tradisional dan 7 motif modern Sasirangan Kalimantan Selatan beserta filosofi dan ceritanya.";
 

@@ -8,7 +8,7 @@ import { tutorialImages } from "@/lib/tutorial-images";
 import { stepsEn, ui, type StepText } from "@/lib/tutorial-i18n";
 import { useLang } from "@/lib/lang-context";
 
-const title = "Panduan Bergambar Tahapan Membuat Sasirangan | Si Rangan";
+const title = "Panduan Bergambar Tahapan Membuat Sasirangan | RanganLab";
 const desc =
   "Lima tahap praktik Sasirangan untuk siswa SD lengkap dengan foto peraga, tujuan belajar, navigasi langkah, pilihan bahasa Indonesia/Inggris, dan zoom gambar.";
 
