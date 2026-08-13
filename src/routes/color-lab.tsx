@@ -6,7 +6,7 @@ import { dyes, motifs } from "@/lib/sirangan-data";
 import { useT } from "@/lib/i18n";
 import { dyeText } from "@/lib/content-i18n";
 
-const title = "Digital Color Lab — Pewarna Alam Sasirangan | Si Rangan";
+const title = "Digital Color Lab — Pewarna Alam Sasirangan | RanganLab";
 const desc =
   "Eksperimen digital sebelum mencelup kain: pilih bahan pewarna alam seperti indigofera, kunyit, daun sungkai, atau buah naga, atur konsentrasi, lalu lihat prediksi warna kain.";
 

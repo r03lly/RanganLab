@@ -17,10 +17,10 @@ export const Route = createFileRoute("/motif/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Motif tidak ditemukan | Si Rangan" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Motif tidak ditemukan | RanganLab" }, { name: "robots", content: "noindex" }],
       };
     }
-    const t = `Motif ${loaderData.motif.nama} — Cerita & Filosofi | Si Rangan`;
+    const t = `Motif ${loaderData.motif.nama} — Cerita & Filosofi | RanganLab`;
     const d = `${loaderData.motif.filosofi} ${loaderData.motif.asal}`;
     return {
       meta: [

@@ -9,7 +9,7 @@ import { dyes, motifs } from "@/lib/sirangan-data";
 import { useT } from "@/lib/i18n";
 import { dyeText, motifText } from "@/lib/content-i18n";
 
-const title = "Virtual Sasirangan Designer — Desain Kain Sebelum Praktik | Si Rangan";
+const title = "Virtual Sasirangan Designer — Desain Kain Sebelum Praktik | RanganLab";
 const desc =
   "Rancang Sasiranganmu secara digital sebelum membuat kain sungguhan: pilih motif, pilih warna pewarna alam, lihat pratinjau kain, lalu praktikkan tahapannya di koper Si Rangan.";
 

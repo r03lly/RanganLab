@@ -73,7 +73,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-const rootTitle = "Si Rangan EduKit — Media Pembelajaran Phygital Sasirangan";
+const rootTitle = "RanganLab — Media Pembelajaran Phygital Sasirangan";
 const rootDesc =
   "Koper alat peraga Sasirangan untuk siswa SD: kenali motif, coba Digital Color Lab, ikuti tutorial praktik, dan kerjakan mini kuis.";
 
@@ -84,12 +84,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: rootTitle },
       { name: "description", content: rootDesc },
-      { name: "author", content: "Si Rangan EduKit" },
+      { name: "author", content: "RanganLab" },
       { property: "og:title", content: rootTitle },
       { property: "og:description", content: rootDesc },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@SiRanganEduKit" },
+      { name: "twitter:site", content: "@RanganLab" },
     ],
     links: [
       {
@@ -160,8 +160,8 @@ function SiteFooter() {
   return (
     <footer className="border-t border-border bg-secondary/60 px-4 py-8 text-center text-xs text-muted-foreground">
       {lang === "en"
-        ? "Si Rangan EduKit — Culture-Based Phygital Learning Media for Sasirangan Education"
-        : "Si Rangan EduKit — Media Pembelajaran Phygital Berbasis Budaya untuk Edukasi Sasirangan"}
+        ? "RanganLab — Culture-Based Phygital Learning Media for Sasirangan Education"
+        : "RanganLab — Media Pembelajaran Phygital Berbasis Budaya untuk Edukasi Sasirangan"}
     </footer>
   );
 }
@@ -172,7 +172,7 @@ function SiteNav() {
     <div className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
       <nav className="mx-auto flex max-w-5xl items-center gap-2 overflow-x-auto px-4 py-3">
         <Link to="/" className="mr-2 shrink-0 font-display text-lg font-extrabold text-primary">
-          Si Rangan
+          RanganLab
         </Link>
         {navItems.map((item) => (
           <Link

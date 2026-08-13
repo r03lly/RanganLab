@@ -6,7 +6,7 @@ import { quiz } from "@/lib/sirangan-data";
 import { quizEn } from "@/lib/content-i18n";
 import { useT } from "@/lib/i18n";
 
-const title = "Mini Kuis Sasirangan untuk Siswa SD | Si Rangan EduKit";
+const title = "Mini Kuis Sasirangan untuk Siswa SD | RanganLab";
 const desc =
   "Delapan soal pilihan ganda untuk mengukur pemahaman siswa tentang motif, tahapan, dan pewarna alam Sasirangan setelah kegiatan praktik.";
 

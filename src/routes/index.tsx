@@ -12,7 +12,7 @@ const heroFoto = [
   "Kijang",
 ].map((nama) => ({ nama, src: motifDaerahImages[nama] }));
 
-const title = "Si Rangan EduKit — Belajar Sasirangan Seru untuk Siswa SD";
+const title = "RanganLab — Belajar Sasirangan Seru untuk Siswa SD";
 const desc =
   "Media pembelajaran phygital: kenali motif Sasirangan, coba pewarna alam di Digital Color Lab, ikuti tutorial praktik, lalu uji pemahaman lewat mini kuis.";
 
@@ -48,7 +48,7 @@ function Index() {
               {h.badge}
             </span>
             <h1 className="mt-4 text-4xl font-extrabold leading-tight sm:text-5xl">
-              Si Rangan EduKit
+              RanganLab
             </h1>
             <p className="mt-4 max-w-xl text-base opacity-90 sm:text-lg">{h.heroDesc}</p>
             <div className="mt-6 flex flex-wrap gap-3">
