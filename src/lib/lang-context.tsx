@@ -57,7 +57,7 @@ export function LanguageToggle({ className = "" }: { className?: string }) {
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
-          {l === "id" ? "🇮🇩 ID" : "🇬🇧 EN"}
+          {l === "id" ? "ID" : "EN"}
         </button>
       ))}
     </div>
