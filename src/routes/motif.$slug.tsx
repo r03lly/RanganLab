@@ -4,6 +4,9 @@ import { MotifImage } from "@/components/sirangan/MotifImage";
 import { Mascot } from "@/components/sirangan/Mascot";
 import { getMotif, semuaMotif, steps } from "@/lib/sirangan-data";
 import { useState } from "react";
+import { stepText, useT } from "@/lib/i18n";
+import { motifText } from "@/lib/content-i18n";
+import type { Lang } from "@/lib/tutorial-i18n";
 
 export const Route = createFileRoute("/motif/$slug")({
   loader: ({ params }) => {
@@ -33,21 +36,19 @@ export const Route = createFileRoute("/motif/$slug")({
   component: MotifDetail,
 });
 
-const palette = [
-  { nama: "Biru indigo", hex: "#26467f" },
-  { nama: "Kuning kunyit", hex: "#dda01a" },
-  { nama: "Hijau sungkai", hex: "#5c7d3c" },
-  { nama: "Merah buah naga", hex: "#b83a72" },
-];
+const paletteHex = ["#26467f", "#dda01a", "#5c7d3c", "#b83a72"] as const;
 
 function MotifDetail() {
-  const { motif } = Route.useLoaderData();
-  const [warna, setWarna] = useState(palette[0]!.hex);
+  const { motif: raw } = Route.useLoaderData();
+  const { lang, t } = useT();
+  const d = t.detail;
+  const motif = motifText(raw, lang);
+  const [warna, setWarna] = useState<string>(paletteHex[0]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
       <Link to="/motif" className="text-sm font-semibold text-primary">
-        ← Semua motif
+        {d.back}
       </Link>
 
       <div className="mt-4 grid gap-6 md:grid-cols-[260px_1fr]">
@@ -60,11 +61,9 @@ function MotifDetail() {
             eager
             className="w-full rounded-2xl shadow-[var(--shadow-lift)]"
           />
-          <p className="mt-2 text-xs text-muted-foreground">
-            Gambar motif dari Buku Profil Produk Unggulan Sasirangan Kalsel.
-          </p>
+          <p className="mt-2 text-xs text-muted-foreground">{d.imageNote}</p>
           <p className="mt-4 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-            🎨 Warnai versi kain
+            {d.colorize}
           </p>
           <MotifFabric
             slug={motif.slug}
@@ -74,17 +73,17 @@ function MotifDetail() {
             className="mt-2 w-full rounded-2xl"
           />
           <div className="mt-2 flex gap-2">
-            {palette.map((p) => (
+            {paletteHex.map((hex, i) => (
               <button
-                key={p.hex}
+                key={hex}
                 type="button"
-                onClick={() => setWarna(p.hex)}
-                aria-label={p.nama}
-                aria-pressed={warna === p.hex}
+                onClick={() => setWarna(hex)}
+                aria-label={d.palette[i]}
+                aria-pressed={warna === hex}
                 className={`h-10 w-10 rounded-full ring-offset-2 ring-offset-background transition-transform hover:scale-110 ${
-                  warna === p.hex ? "ring-2 ring-primary" : "ring-1 ring-border"
+                  warna === hex ? "ring-2 ring-primary" : "ring-1 ring-border"
                 }`}
-                style={{ backgroundColor: p.hex }}
+                style={{ backgroundColor: hex }}
               />
             ))}
           </div>
@@ -97,18 +96,23 @@ function MotifDetail() {
           <p className="mt-2 text-base text-muted-foreground">{motif.asal}</p>
 
           <div className="surface-card mt-5 p-5">
-            <p className="font-display font-bold text-primary">Makna motif</p>
+            <p className="font-display font-bold text-primary">{d.meaning}</p>
             <p className="mt-1 text-sm">{motif.filosofi}</p>
           </div>
 
           <div className="surface-card mt-4 p-5">
-            <p className="font-display font-bold text-primary">🔊 Cerita motif</p>
+            <p className="font-display font-bold text-primary">{d.story}</p>
             <p className="mt-1 text-sm leading-relaxed">{motif.cerita}</p>
-            <ListenButton text={`${motif.nama}. ${motif.cerita}`} />
+            <ListenButton
+              text={`${motif.nama}. ${motif.cerita}`}
+              lang={lang}
+              listenLabel={d.listen}
+              stopLabel={d.stop}
+            />
           </div>
 
           <div className="mt-4 rounded-2xl bg-secondary p-4 text-sm text-secondary-foreground">
-            Warna yang cocok: <strong>{motif.warnaSaran}</strong>
+            {d.suggested} <strong>{motif.warnaSaran}</strong>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -116,53 +120,54 @@ function MotifDetail() {
               to="/color-lab"
               className="rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground"
             >
-              🧪 Coba warnanya
+              {d.tryColor}
             </Link>
             <Link
               to="/kuis"
               className="rounded-full border border-border px-5 py-2.5 text-sm font-bold"
             >
-              🎮 Mainkan kuis
+              {d.playQuiz}
             </Link>
           </div>
         </div>
       </div>
 
       <div className="surface-card mt-10 p-5">
-        <p className="font-display font-bold text-primary">🧵 Praktikkan motif ini di tutorial</p>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Langkah panduan bergambar untuk mewujudkan motif {motif.nama} pada kain.
-        </p>
+        <p className="font-display font-bold text-primary">{d.practiceTitle}</p>
+        <p className="mt-1 text-sm text-muted-foreground">{d.practiceDesc(motif.nama)}</p>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-          {steps.map((s) => (
-            <li key={s.no}>
-              <Link
-                to="/tutorial"
-                search={{ langkah: s.no }}
-                className="flex items-start gap-3 rounded-2xl border border-border bg-card p-3 transition-colors hover:bg-secondary"
-              >
-                <span className="text-xl">{s.emoji}</span>
-                <span>
-                  <span className="block text-sm font-bold">
-                    Tahap {s.no}: {s.nama}
+          {steps.map((rawStep) => {
+            const s = stepText(rawStep, lang);
+            return (
+              <li key={s.no}>
+                <Link
+                  to="/tutorial"
+                  search={{ langkah: s.no }}
+                  className="flex items-start gap-3 rounded-2xl border border-border bg-card p-3 transition-colors hover:bg-secondary"
+                >
+                  <span className="text-xl">{s.emoji}</span>
+                  <span>
+                    <span className="block text-sm font-bold">
+                      {t.common.stage} {s.no}: {s.nama}
+                    </span>
+                    <span className="block text-xs text-muted-foreground">{s.ringkas}</span>
                   </span>
-                  <span className="block text-xs text-muted-foreground">{s.ringkas}</span>
-                </span>
-              </Link>
-            </li>
-          ))}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
       <div className="mt-10">
         <Mascot>
-          <p>Sudah kenal motifnya? Sekarang ambil kain latihan dan mulai menjelujur ya!</p>
+          <p>{d.mascot}</p>
         </Mascot>
       </div>
 
       <div className="mt-10">
         <p className="text-sm font-bold text-muted-foreground">
-          Motif {motif.kategori === "modern" ? "modern" : "tradisional"} lainnya
+          {d.others(motif.kategori === "modern" ? d.kategori.modern : d.kategori.tradisional)}
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {semuaMotif
@@ -171,6 +176,7 @@ function MotifDetail() {
                 m.slug !== motif.slug &&
                 (m.kategori === "modern") === (motif.kategori === "modern"),
             )
+            .map((m) => motifText(m, lang))
             .map((m) => (
               <Link
                 key={m.slug}
@@ -187,7 +193,17 @@ function MotifDetail() {
   );
 }
 
-function ListenButton({ text }: { text: string }) {
+function ListenButton({
+  text,
+  lang,
+  listenLabel,
+  stopLabel,
+}: {
+  text: string;
+  lang: Lang;
+  listenLabel: string;
+  stopLabel: string;
+}) {
   const [playing, setPlaying] = useState(false);
 
   const speak = () => {
@@ -198,7 +214,7 @@ function ListenButton({ text }: { text: string }) {
       return;
     }
     const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = "id-ID";
+    utter.lang = lang === "en" ? "en-US" : "id-ID";
     utter.rate = 0.95;
     utter.onend = () => setPlaying(false);
     setPlaying(true);
@@ -211,7 +227,7 @@ function ListenButton({ text }: { text: string }) {
       onClick={speak}
       className="mt-4 rounded-full bg-accent px-4 py-2 text-sm font-bold text-accent-foreground"
     >
-      {playing ? "⏹ Hentikan" : "🔊 Dengarkan cerita"}
+      {playing ? `⏹ ${stopLabel}` : `🔊 ${listenLabel}`}
     </button>
   );
 }
